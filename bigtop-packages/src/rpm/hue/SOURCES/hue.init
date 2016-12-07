@@ -27,7 +27,7 @@
 
 LOCKFILE=/var/lock/subsys/hue
 DAEMON=/usr/lib/hue/build/env/bin/supervisor # Introduce the server's location here
-LOGDIR=/var/log/hue  # Log directory to use
+LOGDIR=/mnt/log/hue  # Log directory to use
 PIDFILE=/var/run/hue/supervisor.pid
 USER=hue
 EXEC=/usr/lib/hue/build/env/bin/python
@@ -43,7 +43,7 @@ hue_start() {
             DO="/sbin/runuser -s /bin/bash $USER -c"
             APP_REG="/usr/lib/hue/tools/app_reg/app_reg.py"
             # Upgraded apps write their paths in the re_rgister file.
-            RE_REG_LOG=/var/log/hue/hue_re_register.log
+            RE_REG_LOG=/mnt/log/hue/hue_re_register.log
 
             # Make cwd somewhere that $USER can chdir into
             pushd / > /dev/null

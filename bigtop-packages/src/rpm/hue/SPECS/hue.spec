@@ -119,12 +119,12 @@ AutoReqProv: no
 %post -n %{name}-%1 \
 export ROOT=%{hue_dir} \
 export DESKTOP_LOGLEVEL=WARN \
-export DESKTOP_LOG_DIR=/var/log/hue \
+export DESKTOP_LOG_DIR=/mnt/log/hue \
 if [ "$1" != 1 ] ; then \
   echo %{hue_dir}/apps/%1 >> %{hue_dir}/.re_register \
 fi \
 %{hue_dir}/build/env/bin/python %{hue_dir}/tools/app_reg/app_reg.py --install %{apps_dir}/%1 \
-chown -R hue:hue /var/log/hue /var/lib/hue
+chown -R hue:hue /mnt/log/hue /var/lib/hue
 
 # Preun macro for apps
 %define app_preun_macro() \
@@ -132,14 +132,14 @@ chown -R hue:hue /var/log/hue /var/lib/hue
 if [ "$1" = 0 ] ; then \
   export ROOT=%{hue_dir} \
   export DESKTOP_LOGLEVEL=WARN \
-  export DESKTOP_LOG_DIR=/var/log/hue \
+  export DESKTOP_LOG_DIR=/mnt/log/hue \
   if [ -e $ENV_PYTHON ] ; then \
     %{hue_dir}/build/env/bin/python %{hue_dir}/tools/app_reg/app_reg.py --remove %1 ||: \
   fi \
   find %{apps_dir}/%1 -name \*.egg-info -type f -print0 | xargs -0 /bin/rm -fR   \
 fi \
 find %{apps_dir}/%1 -iname \*.py[co] -type f -print0 | xargs -0 /bin/rm -f \
-chown -R hue:hue /var/log/hue /var/lib/hue || :
+chown -R hue:hue /mnt/log/hue /var/lib/hue || :
 
 %description
 Hue is a browser-based desktop interface for interacting with Hadoop.
@@ -270,7 +270,7 @@ fi
 %{hue_dir}/Makefile.sdk
 %{hue_dir}/Makefile.vars
 %{hue_dir}/Makefile.vars.priv
-%{hue_dir}/README.rst
+%{hue_dir}/README.md
 %{hue_dir}/tools
 %{hue_dir}/VERSION
 %{hue_dir}/build/env/bin/*
@@ -291,7 +291,7 @@ fi
 %{useradmin_app_dir}
 %{metastore_app_dir}
 %{oozie_app_dir}
-%attr(0755,%{username},%{username}) /var/log/hue
+%attr(0755,%{username},%{username}) /mnt/log/hue
 %attr(0755,%{username},%{username}) /var/lib/hue
 
 # these apps are packaged as a plugin app

@@ -94,7 +94,7 @@ DOC_DIR=${DOC_DIR:-/usr/share/doc/hue}
 CONF_DIR=${CONF_DIR:-/etc/hue}
 LIB_DIR=${LIB_DIR:-/usr/lib/hue}
 VAR_DIR=${VAR_DIR:-/var/lib/hue}
-LOG_DIR=${LOG_DIR:-/var/log/hue}
+LOG_DIR=${LOG_DIR:-/mnt/log/hue}
 HADOOP_DIR=${HADOOP_DIR:-/usr/lib/hadoop/lib}
 
 BUNDLED_BUILD_DIR=$PREFIX/$LIB_DIR/build
